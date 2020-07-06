@@ -18,9 +18,7 @@ class MyWin(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(MyWin, self).__init__()
         self.setupUi(self)
-        self.chek = False
-        self.login_array = []
-        self.data_array = []
+        self.check = False
         self.button.setEnabled(False)
         self.login.setEnabled(False)
         self.time.setEnabled(False)
@@ -81,7 +79,7 @@ class MyWin(QtWidgets.QMainWindow, Ui_MainWindow):
         self.obj.progress.emit(value + 1)
         self.obj.progress.emit(0)
         self.save_array = list.copy(logs)
-        self.chek = True
+        self.check = True
         self.anal_btn.setText('Перейти на страницу')
         self.anal_btn.setEnabled(True)
         self.login.setEnabled(True)
@@ -157,9 +155,8 @@ class MyWin(QtWidgets.QMainWindow, Ui_MainWindow):
         self.elems_cmb.setCurrentIndex(0)
 
     def sort_by_login(self, login: str) -> None:
-        if self.chek:
+        if self.check:
             clear = []
-            self.login_array.clear()
             self.table.setRowCount(0)
             self.table_head(self.save_array[0])
             value = 0
@@ -180,7 +177,7 @@ class MyWin(QtWidgets.QMainWindow, Ui_MainWindow):
             self.massage_box('Нужно проверить папку')
 
     def sort_by_date(self, date: str) -> None:
-        if self.chek:
+        if self.check:
             norm_time = datetime.strptime(date, '%d.%m.%Y %H:%M:%S')
             unix_time = int(time.mktime(norm_time.timetuple()))
             unix_time = str(unix_time)
