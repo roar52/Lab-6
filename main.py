@@ -264,14 +264,14 @@ class MyWin(QtWidgets.QMainWindow, Ui_MainWindow):
         if len(csv_files) == 0:
             self.massage_box('В данной папке нет csv файлов')
         else:
-            self.my_pool.apply_async(func=read_ddir, args=(csv_files,), callback=self.work_with_data)
+            self.my_pool.apply_async(func=work_with_dir, args=(csv_files,), callback=self.work_with_data)
             self.progressBar.setValue(5)
 
     def massage_box(self, error: str) -> None:
         QtWidgets.QMessageBox.warning(self, 'Внимание', f'{error}', QtWidgets.QMessageBox.Ok)
 
 
-def read_ddir(csv_files) -> []:
+def work_with_dir(csv_files) -> []:
     all_data = []
     for i in range(len(csv_files)):
         with open(csv_files[i], 'r')as csv_file:
